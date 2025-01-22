@@ -398,3 +398,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+obj/Debug/net8.0/dropship.AssemblyInfo.cs
+obj/Debug/net8.0/dropship.AssemblyInfoInputs.cache

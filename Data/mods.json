@@ -1,0 +1,29 @@
+{
+    "Version" : 1.0,
+    "List" : {
+        "TownOfUs-R" : {
+            "Author" : "eDonnes124",
+            "Versioning" : {
+                "v5.2.0" : "2024.11.26"
+            }
+        },
+        "TheOtherRoles" : {
+            "Author" : "TheOtherRolesAU",
+            "Versioning" : {
+                "v4.7.0" : "2024.11.26"
+            }
+        },
+        "StellarRoles" : {
+            "Author" : "Mr-Fluuff",
+            "Versioning" : {
+                "v2024.12.5" : "2024.11.26"
+            }
+        },
+        "TownOfUs-JK" : {
+            "Author" : "JoaKing08",
+            "Versioning" : {
+                "v2.6.3" : "2024.6.4"
+            }
+        }
+    }
+}
