@@ -1,0 +1,17 @@
+c:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.AssemblyInfoInputs.cache
+c:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.AssemblyInfo.cs
+c:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.csproj.CoreCompileInputs.cache
+C:\Users\chips\Desktop\Dropship\bin\Debug\net8.0\Dropship.exe
+C:\Users\chips\Desktop\Dropship\bin\Debug\net8.0\Dropship.deps.json
+C:\Users\chips\Desktop\Dropship\bin\Debug\net8.0\Dropship.runtimeconfig.json
+C:\Users\chips\Desktop\Dropship\bin\Debug\net8.0\Dropship.dll
+C:\Users\chips\Desktop\Dropship\bin\Debug\net8.0\Dropship.pdb
+C:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.dll
+C:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\refint\Dropship.dll
+C:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.pdb
+C:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.genruntimeconfig.cache
+C:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\ref\Dropship.dll
+C:\Users\chips\Desktop\Dropship\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.csproj.AssemblyReference.cache
+C:\Users\chips\Desktop\Dropship\obj\Debug\net8.0\Dropship.csproj.Up2Date
