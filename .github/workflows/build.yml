@@ -33,10 +33,10 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: Dropship.x86.exe
-        path: bin/Release/net8.0/win-x86\publish\Dropship.exe
+        path: Dropship/bin/Release/net8.0/win-x86\publish\Dropship.exe
     - name: Build for release x64.NET
       run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true
     - uses: actions/upload-artifact@v4
       with:
         name: Dropship.x64.exe
-        path: bin/Release/net8.0/win-x64\publish\Dropship.exe
+        path: Dropship/bin/Release/net8.0/win-x64\publish\Dropship.exe
