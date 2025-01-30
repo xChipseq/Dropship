@@ -33,6 +33,6 @@ jobs:
       run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true
       # Releases without .NET
     - name: Build for release x86
-      run: dotnet publish -r win-x86 -c Release /p:PublishSingleFile=true /p:SelfContained=false /p:EnableCompressionInSingleFile=true
+      run: dotnet publish -r win-x86 -c Release /p:PublishSingleFile=true
     - name: Build for release x64
-      run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:SelfContained=false /p:EnableCompressionInSingleFile=true
+      run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true
