@@ -6,7 +6,15 @@
     <RootNamespace>Dropship</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>dropship.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="dropship.ico">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
   <ItemGroup>
     <EmbeddedResource Include="Data\mods.json" />
