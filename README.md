@@ -12,16 +12,19 @@
 
 <p align="center">
 	<a href="https://github.com/xChipseq/Dropship/releases">
-		<img alt="Downloads" src="https://img.shields.io/github/downloads/xChipseq/Dropship/total">
+		<img alt="Downloads" src="https://img.shields.io/github/downloads/xChipseq/Dropship/total?style=flat-square&logo=github&labelColor=%23212024&color=%2343ab59">
+	</a>
+	<a href="https://github.com/xChipseq/Dropship">
+		<img alt="License" src="https://img.shields.io/github/stars/xChipseq/Dropship?style=flat-square&logo=github&labelColor=%23212024&color=%2343ab59">
 	</a>
 	<a href="https://github.com/xChipseq/Dropship/releases/latest">
-		<img alt="Latest Release" src="https://img.shields.io/github/v/release/xChipseq/Dropship?include_prereleases">
+		<img alt="Latest Release" src="https://img.shields.io/github/v/release/xChipseq/Dropship?include_prereleases&sort=date&display_name=tag&style=flat-square&logo=github&labelColor=%23212024&color=%2343ab59">
 	</a>
 	<a href="https://github.com/xChipseq/Dropship/blob/master/LICENSE.md">
-		<img alt="License" src="https://img.shields.io/github/license/xChipseq/Dropship">
+		<img alt="License" src="https://img.shields.io/github/license/xChipseq/Dropship?style=flat-square&labelColor=%23212024&color=%2343ab59">
 	</a>
 	<a href="https://ko-fi.com/chipseq">
-		<img alt="Ko-Fi" src="https://img.shields.io/badge/Support_me-%23FF5E5B?logo=Ko-fi&logoColor=white">
+		<img alt="Ko-Fi" src="https://img.shields.io/badge/suppport_me-F16061?style=flat-square&logo=ko-fi&logoColor=white">
 	</a>
 </p>
 <hr />
