@@ -26,5 +26,37 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Build for release
-      run: dotnet publish --no-restore
+      
+      # Build for release
+    - name: Build for release x86.NET with DepotDownloader Embedded
+      run: dotnet publish -r win-x86 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true /p:IncludeDepotDownloader=true
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Dropship.x86.Embedded.exe
+        path: bin/Release/net8.0/win-x86/publish/Dropship.exe
+    - name: Build for release x64.NET with DepotDownloader Embedded
+      run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true /p:IncludeDepotDownloader=true
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Dropship.x64.Embedded.exe
+        path: bin/Release/net8.0/win-x64/publish/Dropship.exe
+      # Remove build files
+    - name: Remove x86 build files
+      run: |
+        rm -rf Dropship/bin/Release/net8.0/win-x86/publish
+    - name: Remove x64 build files
+      run: |
+        rm -rf Dropship/bin/Release/net8.0/win-x64/publish
+
+    - name: Build for release x86.NET
+      run: dotnet publish -r win-x86 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true /p:IncludeDepotDownloader=false
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Dropship.x86.exe
+        path: bin/Release/net8.0/win-x86/publish/Dropship.exe
+    - name: Build for release x64.NET with DepotDownloader Embedded
+      run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true /p:IncludeDepotDownloader=false
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Dropship.x64.exe
+        path: bin/Release/net8.0/win-x64/publish/Dropship.exe
