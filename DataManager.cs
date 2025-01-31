@@ -25,8 +25,8 @@ public static class DataManager
 
     public static async Task Load()
     {
-        await DownloadModData(false); // not networked for now
-        await DownloadManifestData(false);
+        await DownloadModData(true);
+        await DownloadManifestData(true);
         Logger.Log("All data loaded");
     }
 
@@ -52,6 +52,7 @@ public static class DataManager
         catch (Exception ex)
         {
             Logger.Error($"Failed to load data: {ex.Message}\n{ex.StackTrace}");
+            if (networked) DownloadModData(false); // if networked fails, get the data from local resources
         }
     }
 
@@ -77,6 +78,7 @@ public static class DataManager
         catch (Exception ex)
         {
             Logger.Error($"Failed to load manifest data: {ex.Message}\n{ex.StackTrace}");
+            if (networked) DownloadManifestData(false); // if networked fails, get the data from local resources
         }
     }
 
