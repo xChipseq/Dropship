@@ -33,13 +33,13 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: Dropship.x86.Embedded.exe
-        path: bin/Release/net8.0/win-x86/publish/Dropship.exe
+        path: Dropship/bin/Release/net8.0/win-x86/publish/Dropship.exe
     - name: Build for release x64.NET with DepotDownloader Embedded
       run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true /p:IncludeDepotDownloader=true
     - uses: actions/upload-artifact@v4
       with:
         name: Dropship.x64.Embedded.exe
-        path: bin/Release/net8.0/win-x64/publish/Dropship.exe
+        path: Dropship/bin/Release/net8.0/win-x64/publish/Dropship.exe
       
     # Ensure clean build for non-embedded version
     - name: Clean up previous build artifacts
@@ -54,10 +54,10 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: Dropship.x86.exe
-        path: bin/Release/net8.0/win-x86/publish/Dropship.exe
+        path: Dropship/bin/Release/net8.0/win-x86/publish/Dropship.exe
     - name: Build for release x64.NET with DepotDownloader Embedded
       run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true /p:SelfContained=true /p:EnableCompressionInSingleFile=true /p:IncludeDepotDownloader=false
     - uses: actions/upload-artifact@v4
       with:
         name: Dropship.x64.exe
-        path: bin/Release/net8.0/win-x64/publish/Dropship.exe
+        path: Dropship/bin/Release/net8.0/win-x64/publish/Dropship.exe

@@ -54,3 +54,9 @@
 - [ ] Actual UI using WPF (probably)
 - [ ] Support for other platforms
 - [ ] Support for game bought on apps other than Steam
+
+## Credits
+- [DepotDownloader](https://github.com/SteamRE/DepotDownloader) by [SteamRE](https://github.com/SteamRE) - the app dropship uses to download different Among Us versions
+- [AmongUsLocator Script](https://github.com/xChipseq/Dropship/blob/main/Dropship/AmongUsLocator.cs) provided by [@xtracube](https://github.com/xtracube)
+
+> This mod is not affiliated with Among Us or Innersloth LLC, and the content contained therein is not endorsed or otherwise sponsored by Innersloth LLC. Portions of the materials contained herein are property of Innersloth LLC. © Innersloth LLC. [License](https://github.com/xChipseq/Dropship/blob/main/LICENSE)
