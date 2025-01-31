@@ -52,7 +52,13 @@ public static class DataManager
         catch (Exception ex)
         {
             Logger.Error($"Failed to load data: {ex.Message}\n{ex.StackTrace}");
-            if (networked) DownloadModData(false); // if networked fails, get the data from local resources
+            if (networked) // if networked fails, get the data from local resources
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Couldn't get mod data from github, getting it from local resources...");
+                Console.ForegroundColor = ConsoleColor.White;
+                DownloadModData(false);
+            }
         }
     }
 
@@ -78,7 +84,13 @@ public static class DataManager
         catch (Exception ex)
         {
             Logger.Error($"Failed to load manifest data: {ex.Message}\n{ex.StackTrace}");
-            if (networked) DownloadManifestData(false); // if networked fails, get the data from local resources
+            if (networked) // if networked fails, get the data from local resources
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Couldn't get manifest data from github, getting it from local resources...");
+                Console.ForegroundColor = ConsoleColor.White;
+                DownloadManifestData(false);
+            }
         }
     }
 
@@ -238,7 +250,7 @@ public static class DataManager
 
             if (!dependency)
             {
-                Console.WriteLine($"{modName} successfully installed");
+                Console.WriteLine($"\n{modName} successfully installed");
                 if (ModList[modName].Versioning.ContainsKey(releaseToDownload.Version))
                 {
                     if (DepotDownloader.IsVersionInstalled(releaseToDownload.Version))
@@ -255,7 +267,6 @@ public static class DataManager
                         }
                     }
                 }
-                Console.Write("\n> ");
             }
         }
         catch (Exception ex)

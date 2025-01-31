@@ -167,9 +167,10 @@ public static class ProfileManager
         }
 
         // check the mod and profile version
-        string modAmongVersion = DataManager.ModList[modName].Versioning[version];
+        string modAmongVersion = "none";
+        if (DataManager.ModList[modName].Versioning.ContainsKey(version)) modAmongVersion = DataManager.ModList[modName].Versioning[version];
         string profileAmongVersion = Profiles[EditProfile].AmongUsVersion;
-        if (modAmongVersion != profileAmongVersion)
+        if (modAmongVersion != profileAmongVersion && modAmongVersion != "none")
         {
             Console.WriteLine($"The mod you are trying to add has Among Us {modAmongVersion} specified, but the {EditProfile} is on {profileAmongVersion}\nDo you wish to procced? [y/n]");
             string input = Console.ReadLine();
