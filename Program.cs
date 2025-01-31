@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using Dropship.DepotDownloader;
+﻿using System.Diagnostics;
 using Microsoft.Win32;
 
 namespace Dropship;
@@ -8,18 +6,34 @@ namespace Dropship;
 public class Program
 {
     public static Stopwatch RuntimeTimer { get; private set; }
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         RuntimeTimer = new Stopwatch();
         RuntimeTimer.Start();
-        
+
+#if DEBUG
+        Logger.Debug = true;
+#endif
+
         Directories.Load();
-        DepotDownloaderLoader.Load();
-        DepotDownloaderLoader.DecryptLogin();
+        DepotDownloader.Load();
+        DepotDownloader.DecryptLogin();
+        await DataManager.Load();
+        ProfileManager.LoadProfiles();
         CommandManager.RegisterCommands();
 
         Logger.Title();
-        
+
+        if (!DepotDownloader.Embedded)
+        {
+            if (!File.Exists(DepotDownloader.ExePath))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("WARNING! Your release has no embedded DepotDownloader.exe and it has not been found in Dropship's .exe folder.\nYou will not be able to install builds");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+        }
+
         while (true)
         {
             Console.Write("> ");
@@ -31,58 +45,12 @@ public class Program
             CommandManager.ExecuteCommand(input);
         }
 
-        // things i need in this app:
-        // 1. among us depots downloading - use depotdownloader, ask for account info, download the depots in a folder near the launcher
-        // 2. most popular mods downloading - have all links and versions as a github repo json and also download them in seperate files
-        // 3. launching games directly from the launcher with steam .exe file, bepinex argument stuff etc.
-
-
-        /*
-        // Paths
-        string steamDir = GetSteamDirectory();
-        if (steamDir == "")
-        {
-            Console.ReadLine();
-            return;
-        }
-        string steamExePath = @$"{steamDir}\steam.exe";
-        string bepinexPreloaderPath = @"C:\Users\chips\AppData\Roaming\Thunderstore Mod Manager\DataFolder\LethalCompany\profiles\dzisiaj\BepInEx\core\BepInEx.Preloader.dll";
-        string gameId = "1966720";
-        string arguments = $"--doorstop-enable true --doorstop-target \"{bepinexPreloaderPath}\"";
-
-        try
-        {
-            // Configure the process start info
-            ProcessStartInfo processStartInfo = new ProcessStartInfo
-            {
-                FileName = steamExePath,
-                Arguments = $"-console",
-                UseShellExecute = false
-            };
-
-            // Start the game process
-            Process gameProcess = Process.Start(processStartInfo);
-            if (gameProcess != null)
-            {
-                Console.WriteLine($"game started successfully with PID: {gameProcess.Id}");
-            }
-            else
-            {
-                Console.WriteLine("failed to start the game process.");
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"error starting the game: {ex.Message}");
-        }
-
-        Console.ReadLine();
-        */
+        ProfileManager.SaveProfiles();
     }
 
-    static string GetSteamDirectory()
+    public static string GetSteamExeFile()
     {
-        Console.WriteLine("searching for steam directory...");
+        Logger.Log("searching for steam directory...");
         string steamRegistryPath = @"SOFTWARE\WOW6432Node\Valve\Steam";
         string steamKeyName = "InstallPath";
 
@@ -95,7 +63,7 @@ public class Program
                 object installPath = key.GetValue(steamKeyName);
                 if (installPath != null)
                 {
-                    return installPath.ToString();
+                    return installPath.ToString() + "\\steam.exe";
                 }
             }
         }
@@ -109,13 +77,13 @@ public class Program
                 object installPath = key.GetValue(steamKeyName);
                 if (installPath != null)
                 {
-                    return installPath.ToString();
+                    return installPath.ToString() + "\\steam.exe";
                 }
             }
         }
 
         // Steam directory not found
-        Console.WriteLine("steam directory not found");
-        return "";
+        Logger.Error("steam directory not found");
+        return null;
     }
 }

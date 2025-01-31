@@ -5,11 +5,11 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Text.Json;
 
-namespace Dropship.DepotDownloader;
+namespace Dropship;
 
-public static class DepotDownloaderLoader
+public static class DepotDownloader
 {
-    public static bool Loaded { get; private set; } = false;
+    public static bool Embedded { get; private set; } = false;
     public static string ExePath { get; private set; }
 
     public static bool RememberLoginData = false;
@@ -20,26 +20,14 @@ public static class DepotDownloaderLoader
     {
         try
         {
-            string resourceName = "Dropship.DepotDownloader.DepotDownloader.exe";
-
-            using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            Embedded = ExtractFromResources();
+            if (Embedded) // resource is avaliable and it's extracted into the temp folder
             {
-                if (resourceStream == null)
-                {
-                    Logger.Warn("depot downloader resource not found");
-                    return;
-                }
-
-                string tempPath = Path.Combine(Path.GetTempPath(), "DropshipDepotDownloader.exe");
-
-                using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
-                {
-                    resourceStream.CopyTo(fileStream);
-                }
-
-                Loaded = true;
-                ExePath = tempPath;
-                Logger.Log($"depot downloader has been successfully loaded - {tempPath}");
+                ExePath = Path.Combine(Path.GetTempPath(), "DropshipDepotDownloader.exe");
+            }
+            else // resource is not embedded
+            {
+                ExePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DepotDownloader.exe");
             }
         }
         catch (Exception ex)
@@ -48,19 +36,36 @@ public static class DepotDownloaderLoader
         }
     }
 
-    public static bool DownloadBuild(string buildid)
+    public static bool ExtractFromResources()
     {
-        if (Loaded == false)
+        using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Dropship.DepotDownloader.DepotDownloader.exe"))
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("DepotDownloader failed to load. Restart the program. This also might be a permissions issue");
-            Console.ForegroundColor = ConsoleColor.White;
-            return false;
+            if (resourceStream == null)
+            {
+                Logger.Warn("DepotDownloader.exe is not embedded");
+                return false;
+            }
+
+            string tempPath = Path.Combine(Path.GetTempPath(), "DropshipDepotDownloader.exe");
+
+            // Write the resource to the temp file
+            using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
+            {
+                resourceStream.CopyTo(fileStream);
+            }
+            Logger.Warn($"DepotDownloader.exe has been extracted to {tempPath}");
         }
-        string buildPath = Path.Combine(Directories.VersionsFolder, buildid);
-        if (Directory.Exists(buildPath)) Directory.Delete(buildPath);
+        return true;
+    }
+
+    public static bool DownloadBuild(string buildid, string versionName)
+    {
+        string buildPath = Path.Combine(Directories.VersionsFolder, versionName);
+        if (Directory.Exists(versionName)) Directory.Delete(versionName);
         Directory.CreateDirectory(buildPath);
-        string arguments = $"-app 945360 -depot 945361 -manifest {buildid} -dir {buildPath} -username {LoginUsername} -password {LoginPassword}";
+        Logger.Warn($"versions path - {Directories.VersionsFolder}");
+        Logger.Warn($"build path - {buildPath}");
+        string arguments = $"-app 945360 -depot 945361 -manifest {buildid} -username {LoginUsername} -password {LoginPassword} -dir \"{buildPath}\"";
         var process = new Process
         {
             StartInfo = new ProcessStartInfo
@@ -106,6 +111,7 @@ public static class DepotDownloaderLoader
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
+            Console.WriteLine();
 
             process.WaitForExit();
         }
@@ -119,10 +125,31 @@ public static class DepotDownloaderLoader
         return true;
     }
 
+    public static List<string> GetInstalledVersions()
+    {
+        List<string> versions = new();
+        foreach (var version in Directory.GetDirectories(Directories.VersionsFolder))
+        {
+            versions.Add(version.Split("\\").Last());
+        }
+
+        return versions;
+    }
+
+    public static bool IsVersionInstalled(string version)
+    {
+        var versions = GetInstalledVersions();
+        return versions.Contains(version);
+    }
+
     public static void EncryptLogin()
     {
         string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DropshipData");
-        if (!Directory.Exists(appDataFolder)) Directory.CreateDirectory(appDataFolder);
+        if (Directory.Exists(appDataFolder))
+        {
+            Directory.Delete(appDataFolder);
+        }
+        Directory.CreateDirectory(appDataFolder);
         File.SetAttributes(appDataFolder, FileAttributes.Hidden);
 
         string infoPath = Path.Combine(appDataFolder, "drop.ship");

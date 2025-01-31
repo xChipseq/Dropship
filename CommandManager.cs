@@ -23,6 +23,7 @@ public static class CommandManager
 
     public static void ExecuteCommand(string input)
     {
+        Logger.Log($"User command: {input}", true);
         var parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length == 0) return;
 
@@ -34,6 +35,7 @@ public static class CommandManager
             Command command = Commands.FirstOrDefault(c => c.Name.ToLower() == commandName.ToLower());
             try
             {
+                Logger.Log($"Executing \"{input}\" command", true);
                 command.Execute(args);
             }
             catch (Exception ex)

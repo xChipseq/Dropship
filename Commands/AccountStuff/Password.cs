@@ -1,5 +1,3 @@
-using Dropship.DepotDownloader;
-
 namespace Dropship.Commands;
 
 [RegisterCommand]
@@ -23,7 +21,7 @@ public class PasswordCommand : Command
             Console.WriteLine("Password is in the wrong format: Too short");
             return false;
         }
-        DepotDownloaderLoader.LoginPassword = password;
+        DepotDownloader.LoginPassword = password;
         string censored = password[..2]+"***"+password[5..];
         Console.WriteLine($"Password set to {censored}");
         return true;

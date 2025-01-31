@@ -9,8 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-		<EmbeddedResource Include="DepotDownloader\DepotDownloader.exe" />
+    <EmbeddedResource Include="Data\mods.json" />
+    <EmbeddedResource Include="Data\game.json" />
 	</ItemGroup>
+
+  <PropertyGroup>
+    <IncludeDepotDownloader>false</IncludeDepotDownloader>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IncludeDepotDownloader)' == 'true'">
+    <EmbeddedResource Include="DepotDownloader\DepotDownloader.exe" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.1" />

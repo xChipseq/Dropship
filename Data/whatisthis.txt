@@ -1,2 +1,0 @@
-This folder contains all the data launcher uses to install mods.
-Mods and their compatible versions, game version by manifestid and things like that

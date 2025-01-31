@@ -1,5 +1,3 @@
-using System.Windows.Input;
-
 namespace Dropship.Commands;
 
 [RegisterCommand]
@@ -12,6 +10,7 @@ public class HelpCommand : Command
 
     public override bool Execute(string[] args)
     {
+        Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
         var allCommands = CommandManager.Commands;
         Dictionary<CommandCategory, List<Command>> categories = new();
         foreach (var command in allCommands)

@@ -1,28 +1,88 @@
 {
-    "Version" : 1.0,
+    "Version" : "1.0",
     "List" : {
-        "TownOfUs-R" : {
+        "Reactor" : {
+            "Name" : "Reactor",
+            "Author" : "NuclearPowered",
+            "Releases" : "https://api.github.com/repos/NuclearPowered/Reactor/releases",
+            "Dependencies" : {},
+            "Versioning" : {}
+        },
+
+        "VanillaEnhancements" : {
+            "Name" : "Vanilla Enhancements",
+            "Author" : "xChipseq",
+            "Releases" : "https://api.github.com/repos/xChipseq/VanillaEnhancements/releases",
+            "Dependencies" : {
+                "Reactor" : "2.3.1"
+            },
+            "Versioning" : {}
+        },
+
+        "Town-Of-Us-R" : {
+            "Name" : "Town Of Us R",
             "Author" : "eDonnes124",
+            "Releases" : "https://api.github.com/repos/eDonnes124/Town-Of-Us-R/releases",
+            "Dependencies" : {
+                "Reactor" : "2.3.1"
+            },
             "Versioning" : {
                 "v5.2.0" : "2024.11.26"
             }
         },
         "TheOtherRoles" : {
+            "Name" : "The Other Roles",
             "Author" : "TheOtherRolesAU",
+            "Releases" : "https://api.github.com/repos/TheOtherRolesAU/TheOtherRoles/releases",
+            "Dependencies" : {
+                "Reactor" : "2.3.1"
+            },
             "Versioning" : {
                 "v4.7.0" : "2024.11.26"
             }
         },
         "StellarRoles" : {
+            "Name" : "Stellar Roles",
             "Author" : "Mr-Fluuff",
+            "Releases" : "https://api.github.com/repos/Mr-Fluuff/StellarRolesAU/releases",
+            "Dependencies" : {
+                "Reactor" : "2.3.1"
+            },
             "Versioning" : {
                 "v2024.12.5" : "2024.11.26"
             }
         },
-        "TownOfUs-JK" : {
+        "AllTheRoles" : {
+            "Name" : "All The Roles",
+            "Author" : "Zeo666",
+            "Releases" : "https://api.github.com/repos/Zeo666/AllTheRoles/releases",
+            "Dependencies" : {
+                "Reactor" : "2.3.1"
+            },
+            "Versioning" : {
+                "0.12.0" : "2024.11.26"
+            }
+        },
+        "Town-Of-Us-JK" : {
+            "Name" : "Town Of Us JK",
             "Author" : "JoaKing08",
+            "Releases" : "https://api.github.com/repos/JoaKing08/Town-Of-Us-JK/releases",
+            "Dependencies" : {
+                "Reactor" : "2.2.0"
+            },
             "Versioning" : {
                 "v2.6.3" : "2024.6.4"
+            }
+        },
+        "Town-Of-Us" : {
+            "Name" : "Town of Us",
+            "Author" : "slushiegoose",
+            "Releases" : "https://api.github.com/repos/slushiegoose/Town-Of-Us/releases",
+            "Dependencies" : {
+                "Reactor" : "1.1.0"
+            },
+            "Versioning" : {
+                "v2.2.1" : "2021.7.20e"
             }
         }
     }

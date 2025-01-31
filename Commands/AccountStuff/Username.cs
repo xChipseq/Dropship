@@ -1,5 +1,3 @@
-using Dropship.DepotDownloader;
-
 namespace Dropship.Commands;
 
 [RegisterCommand]
@@ -18,7 +16,7 @@ public class UsernameCommand : Command
             return false;
         }
         string username = args[0];
-        DepotDownloaderLoader.LoginUsername = username;
+        DepotDownloader.LoginUsername = username;
         Console.WriteLine($"Username set to {username}");
         return true;
     }

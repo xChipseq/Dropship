@@ -1,5 +1,3 @@
-using Dropship.DepotDownloader;
-
 namespace Dropship.Commands;
 
 [RegisterCommand]
@@ -12,8 +10,9 @@ public class RememberLoginCommand : Command
 
     public override bool Execute(string[] args)
     {
-        DepotDownloaderLoader.RememberLoginData = true;
-        DepotDownloaderLoader.EncryptLogin();
+        DepotDownloader.RememberLoginData = true;
+        DepotDownloader.EncryptLogin();
+        Console.WriteLine("Login credentials saved");
         return true;
     }
 }

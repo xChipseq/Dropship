@@ -5,12 +5,12 @@ namespace Dropship;
 
 public static class Logger
 {
-    public static bool Debug = true;
+    public static bool Debug = false;
 
-    public static void Log(string text)
+    public static void Log(string text, bool logOnly = false)
     {
         File.AppendAllText(Directories.LogPath, $"({Program.RuntimeTimer.ElapsedMilliseconds}mm) [Debug/Log] {text}{Environment.NewLine}");
-        if (Debug)
+        if (Debug && !logOnly)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"[Debug] {text}");
@@ -30,17 +30,16 @@ public static class Logger
     public static void Error(string text)
     {
         File.AppendAllText(Directories.LogPath, $"({Program.RuntimeTimer.ElapsedMilliseconds}mm) [Debug/Error] {text}{Environment.NewLine}");
-        if (Debug)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"[Debug] {text}");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
+        
+        // Errors are always logged
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine($"[Error] {text}");
+        Console.ForegroundColor = ConsoleColor.White;
     }
 
     public static void Title()
     {
-        Console.Title = "Dropship Mod Loader";
+        Console.Title = "Dropship Mod Manager";
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine(@"
       ___                            _      _        

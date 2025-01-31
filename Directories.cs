@@ -7,6 +7,7 @@ public static class Directories
     public static string DropshipFolder { get; private set; }
     public static string ProfilesFolder { get; private set; }
     public static string VersionsFolder { get; private set; }
+    public static string ModsFolder { get; private set; }
 
     public static void Load()
     {
@@ -20,6 +21,7 @@ public static class Directories
         DropshipFolder = Path.Combine(programDir, "dropship");
         ProfilesFolder = Path.Combine(programDir, "profiles");
         VersionsFolder = Path.Combine(programDir, "versions");
+        ModsFolder = Path.Combine(programDir, "mods");
 
         // Logs are important because without this everything breaks so we are doing it here
         LogPath = Path.Combine(DropshipFolder, "LatestLog.txt");
@@ -32,18 +34,19 @@ public static class Directories
         {
             if (!Path.Exists(DropshipFolder))
             {
-                Logger.Warn($"{DropshipFolder} folder does not exist, creating one...");
                 Directory.CreateDirectory(DropshipFolder);
             }
             if (!Path.Exists(ProfilesFolder))
             {
-                Logger.Warn($"{ProfilesFolder} folder does not exist, creating one...");
                 Directory.CreateDirectory(ProfilesFolder);
             }
             if (!Path.Exists(VersionsFolder))
             {
-                Logger.Warn($"{VersionsFolder} folder does not exist, creating one...");
                 Directory.CreateDirectory(VersionsFolder);
+            }
+            if (!Path.Exists(ModsFolder))
+            {
+                Directory.CreateDirectory(ModsFolder);
             }
 
             Logger.Log("created directories");
