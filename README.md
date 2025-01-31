@@ -14,7 +14,7 @@
 	<a href="https://github.com/xChipseq/Dropship/releases">
 		<img alt="Downloads" src="https://img.shields.io/github/downloads/xChipseq/Dropship/total?style=flat-square&logo=github&labelColor=%23212024&color=%2343ab59">
 	</a>
-	<a href="https://github.com/xChipseq/Dropship">
+	<a href="https://github.com/xChipseq/Dropship/stargazers">
 		<img alt="License" src="https://img.shields.io/github/stars/xChipseq/Dropship?style=flat-square&logo=github&labelColor=%23212024&color=%2343ab59">
 	</a>
 	<a href="https://github.com/xChipseq/Dropship/releases/latest">
@@ -62,4 +62,4 @@
 - [DepotDownloader](https://github.com/SteamRE/DepotDownloader) by [SteamRE](https://github.com/SteamRE) - the app dropship uses to download different Among Us versions
 - [AmongUsLocator Script](https://github.com/xChipseq/Dropship/blob/main/Dropship/AmongUsLocator.cs) provided by [@xtracube](https://github.com/xtracube)
 
-> This mod is not affiliated with Among Us or Innersloth LLC, and the content contained therein is not endorsed or otherwise sponsored by Innersloth LLC. Portions of the materials contained herein are property of Innersloth LLC. © Innersloth LLC. [License](https://github.com/xChipseq/Dropship/blob/main/LICENSE)
+> This project is not affiliated with Among Us or Innersloth LLC, and the content contained therein is not endorsed or otherwise sponsored by Innersloth LLC. Portions of the materials contained herein are property of Innersloth LLC. © Innersloth LLC. [License](https://github.com/xChipseq/Dropship/blob/main/LICENSE)
