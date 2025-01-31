@@ -49,6 +49,13 @@
             },
             "Versioning" : {}
         },
+        "AUnlocker" : {
+            "Name" : "AUnlocker",
+            "Author" : "astra1dev",
+            "Releases" : "https://api.github.com/repos/astra1dev/AUnlocker/releases",
+            "Dependencies" : {},
+            "Versioning" : {}
+        },
 
         "Town-Of-Us-R" : {
             "Name" : "Town Of Us R",
