@@ -66,6 +66,7 @@ public static class DepotDownloader
         Logger.Warn($"versions path - {Directories.VersionsFolder}");
         Logger.Warn($"build path - {buildPath}");
         string arguments = $"-app 945360 -depot 945361 -manifest {buildid} -username {LoginUsername} -password {LoginPassword} -dir \"{buildPath}\"";
+        if (RememberLoginData) arguments += " -remember-password";
         var process = new Process
         {
             StartInfo = new ProcessStartInfo
@@ -140,73 +141,5 @@ public static class DepotDownloader
     {
         var versions = GetInstalledVersions();
         return versions.Contains(version);
-    }
-
-    public static void EncryptLogin()
-    {
-        string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DropshipData");
-        if (Directory.Exists(appDataFolder))
-        {
-            Directory.Delete(appDataFolder);
-        }
-        Directory.CreateDirectory(appDataFolder);
-        File.SetAttributes(appDataFolder, FileAttributes.Hidden);
-
-        string infoPath = Path.Combine(appDataFolder, "drop.ship");
-        var random = new Random();
-        List<string> info = new()
-        {
-            Convert.ToBase64String(Encoding.UTF8.GetBytes(random.Next(1, 99999).ToString())),
-            Convert.ToBase64String(Encoding.UTF8.GetBytes(random.Next(1, 99999).ToString())),
-        };
-        File.WriteAllText(infoPath, Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(info))));
-
-        string ciphertextPath = Path.Combine(appDataFolder, $"{info[0]}.bin");
-        string entropyPath = Path.Combine(appDataFolder, $"{info[1]}.bin");
-
-        string plainText = $"{LoginUsername}::{LoginPassword}";
-        byte[] plaintextBytes = Encoding.UTF8.GetBytes(plainText);
-        plainText = "";
-
-        // Generate entropy
-        byte[] entropy = new byte[20];
-        using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-        {
-            rng.GetBytes(entropy);
-        }
-
-        // Encrypt using ProtectedData
-        byte[] ciphertext = ProtectedData.Protect(plaintextBytes, entropy, DataProtectionScope.CurrentUser);
-
-        // Save ciphertext and entropy
-        File.WriteAllBytes(ciphertextPath, ciphertext);
-        File.WriteAllBytes(entropyPath, entropy);
-
-        Logger.Log($"Login data encrypted and saved");
-    }
-
-    public static void DecryptLogin()
-    {
-        string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DropshipData");
-        string infoPath = Path.Combine(appDataFolder, "drop.ship");
-        if (!File.Exists(infoPath))
-        {
-            Logger.Warn("No login data to load");
-            return;
-        }
-        Logger.Log("Loading login data..");
-
-        string infoJson = Encoding.UTF8.GetString(Convert.FromBase64String(File.ReadAllText(infoPath)));
-        List<string> info = JsonSerializer.Deserialize<List<string>>(infoJson);
-
-        byte[] ciphertext = File.ReadAllBytes(Path.Combine(appDataFolder, $"{info[0]}.bin"));
-        byte[] entropy = File.ReadAllBytes(Path.Combine(appDataFolder, $"{info[1]}.bin"));
-
-        byte[] plaintextBytes = ProtectedData.Unprotect(ciphertext, entropy, DataProtectionScope.CurrentUser);
-
-        string login = Encoding.UTF8.GetString(plaintextBytes);
-        var elements = login.Split("::");
-        LoginUsername = elements[0];
-        LoginPassword = elements[1];
     }
 }

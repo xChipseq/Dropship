@@ -17,7 +17,6 @@ public class Program
 
         Directories.Load();
         DepotDownloader.Load();
-        DepotDownloader.DecryptLogin();
         await DataManager.Load();
         ProfileManager.LoadProfiles();
         CommandManager.RegisterCommands();
