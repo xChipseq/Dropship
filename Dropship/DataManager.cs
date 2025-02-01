@@ -147,21 +147,25 @@ public static class DataManager
 
     public static async Task<bool> DownloadMod(string modName, string version, bool dependency = false)
     {
-        ModData mod = ModList[modName];
+        if (!ModList.TryGetValue(modName, out var mod))
+        {
+            return false;
+        }
+
         string modFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mods", $"{modName}");
         try
         {
             Release releaseToDownload = null;
             if (version == "latest")
             {
-                string url = ModList[modName].ReleasesUrl + "/latest"; // link to the latest release
+                string url = mod.Releases + "/latest"; // link to the latest release
                 var latestresponse = _HttpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead).Result;
                 releaseToDownload = await latestresponse.Content.ReadFromJsonAsync<Release>();
             }
             else
             {
                 // search for the tag with specified version
-                var searchresponse = _HttpClient.GetAsync(ModList[modName].ReleasesUrl, HttpCompletionOption.ResponseHeadersRead).Result;
+                var searchresponse = _HttpClient.GetAsync(mod.Releases, HttpCompletionOption.ResponseHeadersRead).Result;
                 List<Release> releases = await searchresponse.Content.ReadFromJsonAsync<List<Release>>();
 
                 foreach (var release in releases)
@@ -183,7 +187,12 @@ public static class DataManager
             ReleaseAsset assetToDownload = null;
             foreach (var asset in releaseToDownload.Assets)
             {
-                if (asset.FileName.EndsWith(".dll"))
+                var assetName = asset.FileName;
+                if (assetName.EndsWith(".dll") &&
+                    (
+                        string.IsNullOrEmpty(mod.DllName) ||
+                        mod.DllName == assetName.Replace(".dll", "")
+                    ))
                 {
                     assetToDownload = asset;
                     break;
