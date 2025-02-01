@@ -147,21 +147,25 @@ public static class DataManager
 
     public static async Task<bool> DownloadMod(string modName, string version, bool dependency = false)
     {
-        ModData mod = ModList[modName];
+        if (!ModList.TryGetValue(modName, out var mod))
+        {
+            return false;
+        }
+
         string modFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mods", $"{modName}");
         try
         {
             Release releaseToDownload = null;
             if (version == "latest")
             {
-                string url = ModList[modName].ReleasesUrl + "/latest"; // link to the latest release
+                string url = mod.Releases + "/latest"; // link to the latest release
                 var latestresponse = _HttpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead).Result;
                 releaseToDownload = await latestresponse.Content.ReadFromJsonAsync<Release>();
             }
             else
             {
                 // search for the tag with specified version
-                var searchresponse = _HttpClient.GetAsync(ModList[modName].ReleasesUrl, HttpCompletionOption.ResponseHeadersRead).Result;
+                var searchresponse = _HttpClient.GetAsync(mod.Releases, HttpCompletionOption.ResponseHeadersRead).Result;
                 List<Release> releases = await searchresponse.Content.ReadFromJsonAsync<List<Release>>();
 
                 foreach (var release in releases)
@@ -183,7 +187,12 @@ public static class DataManager
             ReleaseAsset assetToDownload = null;
             foreach (var asset in releaseToDownload.Assets)
             {
-                if (asset.FileName.EndsWith(".dll"))
+                var assetName = asset.FileName;
+                if (assetName.EndsWith(".dll") &&
+                    (
+                        string.IsNullOrEmpty(mod.DllName) ||
+                        mod.DllName == assetName.Replace(".dll", "")
+                    ))
                 {
                     assetToDownload = asset;
                     break;
@@ -233,11 +242,11 @@ public static class DataManager
             contentStream.Close();
 
             // Check for dependencies
-            if (ModList[modName].Dependencies.Count > 0 && !dependency)
+            if (mod.Dependencies.Count > 0 && !dependency)
             {
                 Console.WriteLine("\nChecking for dependencies...");
 
-                foreach (var d in ModList[modName].Dependencies)
+                foreach (var d in mod.Dependencies)
                 {
                     if (!IsModDownloaded(d.Value, d.Key))
                     {
@@ -251,18 +260,18 @@ public static class DataManager
             if (!dependency)
             {
                 Console.WriteLine($"\n{modName} successfully installed");
-                if (ModList[modName].Versioning.ContainsKey(releaseToDownload.Version))
+                if (mod.Versioning.ContainsKey(releaseToDownload.Version))
                 {
                     if (DepotDownloader.IsVersionInstalled(releaseToDownload.Version))
                     {
-                        Console.WriteLine($"Among Us {ModList[modName].Versioning[releaseToDownload.Version]} is specified for {modName} {releaseToDownload.Version}\nDownload it? [y/n]");
+                        Console.WriteLine($"Among Us {mod.Versioning[releaseToDownload.Version]} is specified for {modName} {releaseToDownload.Version}\nDownload it? [y/n]");
                         string input = Console.ReadLine();
                         if (!string.IsNullOrWhiteSpace(input))
                         {
                             if (input.ToLower() == "y")
                             {
-                                string buildid = ManifestVersionsList[ModList[modName].Versioning[releaseToDownload.Version]];
-                                DepotDownloader.DownloadBuild(buildid, ModList[modName].Versioning[releaseToDownload.Version]);
+                                string buildid = ManifestVersionsList[mod.Versioning[releaseToDownload.Version]];
+                                DepotDownloader.DownloadBuild(buildid, mod.Versioning[releaseToDownload.Version]);
                             }
                         }
                     }

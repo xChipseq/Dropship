@@ -2,22 +2,16 @@ using System.Text.Json.Serialization;
 
 namespace Dropship.Objects;
 
-public class ModData
+public record class ModData(
+    string Name,
+    string Author,
+    string Releases, // This is the github api link that are we getting releases from
+    Dictionary<string, string> Dependencies, // All the mod's dependecies and their versions. Empty if none
+    Dictionary<string, string> Versioning, // This list contains some predefined game versions for tags
+    string? DllName = null)
 {
-    [JsonPropertyName("Name")]
-    public string Name { get; set; }
-
-    [JsonPropertyName("Author")]
-    public string Author { get; set; }
-
-    [JsonPropertyName("Releases")]
-    public string ReleasesUrl { get; set; } // This is the github api link that are we getting releases from
-
-    [JsonPropertyName("Dependencies")]
-    public Dictionary<string, string> Dependencies { get; set; } // All the mod's dependecies and their versions. Empty if none
-
-    [JsonPropertyName("Versioning")]
-    public Dictionary<string, string> Versioning { get; set; } // This list contains some predefined game versions for tags
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? DllName { get; set; } = DllName;
 }
 
 public class ModList
