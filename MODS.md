@@ -16,6 +16,7 @@
 
 ### Other
 - [Vanilla Enhancements](https://github.com/xChipseq/VanillaEnhancements)
+- [AUnlocker](https://github.com/astra1dev/AUnlocker)
 
 ### Dependencies
 - [Reactor](https://github.com/NuclearPowered/Reactor)
