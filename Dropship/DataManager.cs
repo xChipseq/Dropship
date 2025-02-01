@@ -242,11 +242,11 @@ public static class DataManager
             contentStream.Close();
 
             // Check for dependencies
-            if (ModList[modName].Dependencies.Count > 0 && !dependency)
+            if (mod.Dependencies.Count > 0 && !dependency)
             {
                 Console.WriteLine("\nChecking for dependencies...");
 
-                foreach (var d in ModList[modName].Dependencies)
+                foreach (var d in mod.Dependencies)
                 {
                     if (!IsModDownloaded(d.Value, d.Key))
                     {
@@ -260,18 +260,18 @@ public static class DataManager
             if (!dependency)
             {
                 Console.WriteLine($"\n{modName} successfully installed");
-                if (ModList[modName].Versioning.ContainsKey(releaseToDownload.Version))
+                if (mod.Versioning.ContainsKey(releaseToDownload.Version))
                 {
                     if (DepotDownloader.IsVersionInstalled(releaseToDownload.Version))
                     {
-                        Console.WriteLine($"Among Us {ModList[modName].Versioning[releaseToDownload.Version]} is specified for {modName} {releaseToDownload.Version}\nDownload it? [y/n]");
+                        Console.WriteLine($"Among Us {mod.Versioning[releaseToDownload.Version]} is specified for {modName} {releaseToDownload.Version}\nDownload it? [y/n]");
                         string input = Console.ReadLine();
                         if (!string.IsNullOrWhiteSpace(input))
                         {
                             if (input.ToLower() == "y")
                             {
-                                string buildid = ManifestVersionsList[ModList[modName].Versioning[releaseToDownload.Version]];
-                                DepotDownloader.DownloadBuild(buildid, ModList[modName].Versioning[releaseToDownload.Version]);
+                                string buildid = ManifestVersionsList[mod.Versioning[releaseToDownload.Version]];
+                                DepotDownloader.DownloadBuild(buildid, mod.Versioning[releaseToDownload.Version]);
                             }
                         }
                     }
