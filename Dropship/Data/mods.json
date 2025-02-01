@@ -115,6 +115,39 @@
             "Versioning" : {
                 "v2.2.1" : "2021.7.20e"
             }
+        },
+        "ExtremeRoles": {
+            "Name": "Extreme Roles",
+            "Author": "yukieiji",
+            "Releases": "https://api.github.com/repos/yukieiji/ExtremeRoles/releases",
+            "Versioning": {
+                "v12.1.4.2": "2024.11.26"
+            },
+            "DllName": "ExtremeRoles"
+        },
+        "ExtremeSkins": {
+            "Name": "Extreme Skins",
+            "Author": "yukieiji",
+            "Releases": "https://api.github.com/repos/yukieiji/ExtremeRoles/releases",
+            "Dependencies": {
+                "ExtremeRoles": "v12.1.4.2"
+            },
+            "Versioning": {
+                "v12.1.4.2": "2024.11.26"
+            },
+            "DllName": "ExtremeSkins"
+        },
+        "ExtremeVoiceEngine": {
+            "Name": "Extreme Voice Engine",
+            "Author": "yukieiji",
+            "Releases": "https://api.github.com/repos/yukieiji/ExtremeRoles/releases",
+            "Dependencies": {
+                "ExtremeRoles": "v12.1.4.2"
+            },
+            "Versioning": {
+                "v12.1.4.2": "2024.11.26"
+            },
+            "DllName": "ExtremeVoiceEngine"
         }
     }
 }
