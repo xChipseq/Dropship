@@ -242,19 +242,22 @@ public static class DataManager
             contentStream.Close();
 
             // Check for dependencies
-            if (mod.Dependencies.Count > 0 && !dependency)
+            if (mod.Dependencies != null && !dependency)
             {
                 Console.WriteLine("\nChecking for dependencies...");
-
-                foreach (var d in mod.Dependencies)
+                if (mod.Dependencies.Count > 0)
                 {
-                    if (!IsModDownloaded(d.Value, d.Key))
-                    {
-                        await DownloadMod(d.Key, d.Value, true);
-                    }
-                }
 
-                Console.WriteLine("\nAll dependencies installed");
+                    foreach (var d in mod.Dependencies)
+                    {
+                        if (!IsModDownloaded(d.Value, d.Key))
+                        {
+                            await DownloadMod(d.Key, d.Value, true);
+                        }
+                    }
+
+                    Console.WriteLine("\nAll dependencies installed");
+                }
             }
 
             if (!dependency)

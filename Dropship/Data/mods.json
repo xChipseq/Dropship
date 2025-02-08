@@ -12,7 +12,9 @@
             "Name" : "Mira API",
             "Author" : "All-Of-Us-Mods",
             "Releases" : "https://api.github.com/repos/All-Of-Us-Mods/MiraAPI/releases",
-            "Dependencies" : {},
+            "Dependencies" : {
+                "Reactor" : "2.3.1"
+            },
             "Versioning" : {}
         },
 
@@ -29,14 +31,12 @@
             "Name" : "Submerged",
             "Author" : "SubmergedAmongUs",
             "Releases" : "https://api.github.com/repos/SubmergedAmongUs/Submerged/releases",
-            "Dependencies" : {},
             "Versioning" : {}
         },
         "BetterPolus" : {
             "Name" : "Better Polus",
             "Author" : "Brybry16",
             "Releases" : "https://api.github.com/repos/Brybry16/BetterPolus/releases",
-            "Dependencies" : {},
             "Versioning" : {}
         },
 
@@ -53,7 +53,6 @@
             "Name" : "AUnlocker",
             "Author" : "astra1dev",
             "Releases" : "https://api.github.com/repos/astra1dev/AUnlocker/releases",
-            "Dependencies" : {},
             "Versioning" : {}
         },
 
