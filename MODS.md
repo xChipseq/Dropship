@@ -8,6 +8,7 @@
 - [All The Roles](https://github.com/Zeo666/AllTheRoles)
 - [Town of Us](https://github.com/slushiegoose/Town-Of-Us)
 - [Town of Us JK](https://github.com/JoaKing08/Town-Of-Us-JK)
+- [ExtremeRoles](https://github.com/yukieiji/ExtremeRoles)
 
 ### Custom Maps
 - [LevelImposter](https://github.com/DigiWorm0/LevelImposter)
