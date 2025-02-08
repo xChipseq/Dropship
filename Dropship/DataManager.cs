@@ -37,7 +37,7 @@ public static class DataManager
             if (networked)
             {
                 Logger.Log("Downloading modlist...");
-                var request = await _HttpClient.GetAsync("https://github.com/xChipseq/Dropship-Mod-Manager/raw/main/Data/mods.json");
+                var request = await _HttpClient.GetAsync("https://github.com/xChipseq/Dropship/raw/main/Dropship/Data/mods.json");
                 var json = await request.Content.ReadFromJsonAsync<ModList>();
                 ModList = json.List;
             }
@@ -69,7 +69,7 @@ public static class DataManager
             if (networked)
             {
                 Logger.Log("Downloading manifest data...");
-                var request = await _HttpClient.GetAsync("https://github.com/xChipseq/Dropship-Mod-Manager/raw/main/Data/game.json");
+                var request = await _HttpClient.GetAsync("https://github.com/xChipseq/Dropship/raw/main/Dropship/Data/game.json");
                 var json = await request.Content.ReadFromJsonAsync<ManifestData>();
                 ManifestVersionsList = json.List;
             }
