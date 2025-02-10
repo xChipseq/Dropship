@@ -18,10 +18,11 @@
 ### Other
 - [Vanilla Enhancements](https://github.com/xChipseq/VanillaEnhancements)
 - [AUnlocker](https://github.com/astra1dev/AUnlocker)
+- [Unlock-dlekS-ehT](https://github.com/Tommy-XL/Unlock-dlekS-ehT)
 
 ### Dependencies
 - [Reactor](https://github.com/NuclearPowered/Reactor)
 - [Mira API](https://github.com/All-Of-Us-Mods/MiraAPI)
 
 > [!Warning]
-> [The list](https://github.com/xChipseq/Dropship/blob/main/Data/mods.json) is incomplete and is missing a lot of stuff
+> [The list](https://github.com/xChipseq/Dropship/blob/main/Dropship/Data/mods.json) is incomplete and is missing a lot of stuff
