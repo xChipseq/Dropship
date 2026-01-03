@@ -161,5 +161,14 @@
             },
             "DllName": "ExtremeVoiceEngine"
         }
+        "TOU-Mira" : {
+            "Name" : "Town of Us Mira",
+            "Author" : "AU-Avengers",
+            "Releases" : "https://api.github.com/repos/AU-Avengers/TOU-Mira/releases",
+            "Dependencies" : {
+                "Reactor" : "2.3.1"
+            },
+            "Versioning" : {}
+        },
     }
 }
